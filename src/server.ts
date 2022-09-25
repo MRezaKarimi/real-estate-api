@@ -2,8 +2,12 @@ import { createServer } from "http";
 import bodyParser from "body-parser";
 import express from "express";
 import routes from "./routes";
+import { connectDB } from "./db/config";
+import { config as envConfig } from "dotenv";
 
 const router = express();
+envConfig();
+connectDB();
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
