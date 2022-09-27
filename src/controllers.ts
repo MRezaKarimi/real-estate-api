@@ -35,6 +35,15 @@ export async function getPropertyDetails(
   }
 }
 
+export async function getRecentProperties(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  let property = await Property.find().sort({ $natural: -1 }).limit(9);
+  return res.status(200).json(property);
+}
+
 export async function addProperty(
   req: Request,
   res: Response,
