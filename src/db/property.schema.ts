@@ -14,35 +14,35 @@ export interface IProperty extends Document {
 const PropertySchema: Schema = new Schema({
   bed: {
     type: Number,
-    required: true,
+    required: [true, "bed is required"],
   },
   bath: {
     type: Number,
-    required: true,
+    required: [true, "bath is required"],
   },
   price: {
     type: Number,
-    required: true,
+    required: [true, "price is required"],
   },
   email: {
     type: String,
-    required: true,
+    required: [true, "email is required"],
   },
   lat: {
     type: String,
-    required: true,
+    required: [true, "lat is required"],
   },
   long: {
     type: String,
-    required: true,
+    required: [true, "long is required"],
   },
   address: {
     type: String,
-    required: true,
+    required: [true, "address is required"],
   },
   images: {
     type: [String],
-    required: true,
+    required: [true, "images is required"],
   },
 });
 
