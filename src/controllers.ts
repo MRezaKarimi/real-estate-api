@@ -9,7 +9,7 @@ export async function getPropertiesList(
   next: NextFunction
 ) {
   let propertyList = await Property.find()
-    .skip(Number(req.query.offset))
+    .skip(Number(req.query.offset) * Number(req.query.limit))
     .limit(Number(req.query.limit));
 
   return res.status(200).json({
