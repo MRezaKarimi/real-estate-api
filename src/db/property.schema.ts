@@ -8,7 +8,7 @@ export interface IProperty extends Document {
   lat: string;
   long: string;
   address: string;
-  images: string[];
+  images: object;
 }
 
 const PropertySchema: Schema = new Schema({
@@ -19,6 +19,10 @@ const PropertySchema: Schema = new Schema({
   bath: {
     type: Number,
     required: [true, "bath is required"],
+  },
+  area: {
+    type: Number,
+    required: [true, "area is required"],
   },
   price: {
     type: Number,
@@ -41,7 +45,7 @@ const PropertySchema: Schema = new Schema({
     required: [true, "address is required"],
   },
   images: {
-    type: [String],
+    type: Object,
     required: [true, "images is required"],
   },
 });
