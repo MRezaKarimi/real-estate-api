@@ -1,8 +1,8 @@
 import { IProperty } from "../db/property.schema";
 
 type Bounds = {
-  topLeft: number[];
-  bottomRight: number[];
+  northWest: number[];
+  southEast: number[];
 };
 
 export default function CalculateMapBound(propertyList: IProperty[]): Bounds {
@@ -27,7 +27,7 @@ export default function CalculateMapBound(propertyList: IProperty[]): Bounds {
   });
 
   return {
-    topLeft: [minLat, maxLng],
-    bottomRight: [maxLat, minLng],
+    northWest: [minLat, maxLng],
+    southEast: [maxLat, minLng],
   };
 }
