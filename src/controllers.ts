@@ -8,12 +8,29 @@ export async function getPropertiesList(
   res: Response,
   next: NextFunction
 ) {
-  let propertyList = await Property.find()
-    .skip(Number(req.query.offset) * Number(req.query.limit))
-    .limit(Number(req.query.limit));
+  let query = {};
+  const offset = Number(req.query.offset ?? 0);
+  const limit = Number(req.query.limit ?? 10);
+
+  if (req.query.northWest && req.query.southEast) {
+    const northWest = JSON.parse(req.query.northWest as string);
+    const southEast = JSON.parse(req.query.southEast as string);
+
+    query = {
+      lat: {
+        $gte: southEast[0],
+        $lte: northWest[0],
+      },
+      long: { $gte: northWest[1], $lte: southEast[1] },
+    };
+  }
+
+  let propertyList = await Property.find(query)
+    .skip(offset * limit)
+    .limit(limit);
 
   return res.status(200).json({
-    pages: Math.ceil((await Property.count()) / Number(req.query.limit)),
+    pages: Math.ceil((await Property.find(query).count()) / limit),
     mapBounds: CalculateMapBound(propertyList),
     data: propertyList,
   });
