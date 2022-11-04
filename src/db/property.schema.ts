@@ -5,8 +5,8 @@ export interface IProperty extends Document {
   bed: string;
   bath: string;
   email: string;
-  lat: string;
-  long: string;
+  lat: number;
+  long: number;
   address: string;
   images: object;
 }
@@ -33,11 +33,11 @@ const PropertySchema: Schema = new Schema({
     required: [true, "email is required"],
   },
   lat: {
-    type: String,
+    type: Number,
     required: [true, "lat is required"],
   },
   long: {
-    type: String,
+    type: Number,
     required: [true, "long is required"],
   },
   address: {
