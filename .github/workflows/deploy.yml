@@ -19,4 +19,4 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "real-estate-api"
-          entrypoint: "./main.ts" # TODO: update entrypoint
+          entrypoint: "./src/server.ts" # TODO: update entrypoint
