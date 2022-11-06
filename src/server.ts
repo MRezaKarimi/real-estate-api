@@ -38,4 +38,4 @@ router.use((req, res, next) => {
 });
 
 const server = createServer(router);
-server.listen(4000);
+server.listen(process.env.PORT);
