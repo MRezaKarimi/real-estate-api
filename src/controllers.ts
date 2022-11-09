@@ -8,15 +8,23 @@ export async function getPropertiesList(
   res: Response,
   next: NextFunction
 ) {
-  let query = {};
   const offset = Number(req.query.offset ?? 0);
   const limit = Number(req.query.limit ?? 10);
+
+  let query = {};
+
+  if (req.query.ids != null) {
+    query = {
+      _id: { $in: JSON.parse(req.query.ids as string) },
+    };
+  }
 
   if (req.query.northWest && req.query.southEast) {
     const northWest = JSON.parse(req.query.northWest as string);
     const southEast = JSON.parse(req.query.southEast as string);
 
     query = {
+      ...query,
       lat: {
         $gte: southEast[0],
         $lte: northWest[0],
