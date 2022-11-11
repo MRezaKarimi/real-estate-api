@@ -19,6 +19,16 @@ export async function getPropertiesList(
     };
   }
 
+  if (req.query.city != null) {
+    query = {
+      ...query,
+      city: {
+        $regex: req.query.city,
+        $options: "i",
+      },
+    };
+  }
+
   if (req.query.northWest && req.query.southEast) {
     const northWest = JSON.parse(req.query.northWest as string);
     const southEast = JSON.parse(req.query.southEast as string);
