@@ -8,7 +8,7 @@ export async function getPropertiesList(
   res: Response,
   next: NextFunction
 ) {
-  const offset = Number(req.query.offset ?? 0);
+  const offset = Number(req.query.offset ?? 1);
   const limit = Number(req.query.limit ?? 10);
 
   let query = {};
@@ -44,7 +44,7 @@ export async function getPropertiesList(
   }
 
   let propertyList = await Property.find(query)
-    .skip(offset * limit)
+    .skip((offset - 1) * limit)
     .limit(limit);
 
   return res.status(200).json({
